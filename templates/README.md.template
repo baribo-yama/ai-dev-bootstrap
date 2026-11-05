@@ -1,0 +1,19 @@
+# {{プロジェクト名}}
+
+<!-- 書くこと: 何を作るか。1〜2行。 -->
+
+- 仕様: [docs/SPEC.md](docs/SPEC.md)
+- 作業計画: [docs/PHASES.md](docs/PHASES.md)
+- 決定ログ: [docs/adr/](docs/adr/)
+- 作業ログ: [docs/DEVLOG.md](docs/DEVLOG.md)
+
+## Claude Code での進め方
+1. `/plan-issues` で、現在のフェーズのタスクを GitHub Issue にする。
+2. issue の内容を確認し、実装を任せるものに `ai-ready` ラベルを付ける。
+3. `/next-task` で、1 つ実装して PR を出す。
+4. PR を確認してマージする。2 に戻る。
+
+詳しくは [ADR 0001](docs/adr/0001-issue-driven-workflow.md) を参照。
+
+## 初回だけ
+`sh scripts/protect-main.sh` で main を保護する（CI が main に入ったあと。`--dry-run` で内容を確認できる）。

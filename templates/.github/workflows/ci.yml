@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # ブランチ保護の必須チェック名になる。変えるときは scripts/protect-main.sh も直す。
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # TODO: 環境のセットアップをここに書く（言語のバージョン、依存のインストール）。
+      #       書くまでは、下のステップがコマンドを見つけられず失敗する。
+      - name: 型チェック
+        run: |
+          {{型チェックコマンド}}
+      - name: lint
+        run: |
+          {{lintコマンド}}
+      - name: テスト
+        run: |
+          {{テストコマンド}}
