@@ -44,16 +44,18 @@ CI の環境セットアップ（言語のバージョン、依存のインス�
 - `{{` が、どの生成物にも残っていない（`grep -rn '{{' .`）。
 - `.claude/settings.json` が JSON として読める。
 - `ci.yml`、`.github/ISSUE_TEMPLATE/task.yml` が YAML として読める（YAML を読める道具がなければ「目視のみ」と書く）。
-- `.claude/commands/` の 4 つに `description` がある。
+- `.claude/commands/` の 6 つ（adr、log、next-task、plan-issues、spec、plan-phases）に `description` がある。
 - フックを入れたなら、`echo '{"tool_input":{"file_path":"x.zzz"}}' | node scripts/typecheck-hook.mjs` が終了コード 0 で終わる。
 - 飛ばしたファイルが上書きされていない。
 
 ## 5. 報告
-作ったファイルの一覧と、残したコメント（あとで書く項目）を出す。そのうえで、人間のやることを伝える。
+作ったファイルの一覧と、残したコメント（あとで書く項目）を出す。そのうえで、人間のやることを伝える。仕様を決める `/spec` から始めるよう、強く案内する。
 1. `.github/workflows/ci.yml` の `# TODO` に、環境のセットアップを書く。書くまで CI は失敗する。
 2. この一式を、`chore/dev-workflow` のようなブランチで PR にして、CI が通ることを確かめてからマージする。
 3. マージ後に `sh scripts/protect-main.sh --dry-run` で内容を見て、`sh scripts/protect-main.sh` を実行する。
-4. `docs/SPEC.md` と `docs/PHASES.md` を書く。そのあと `/plan-issues` で issue にする。
+4. `/spec <作りたいものの要件>` で、仕様を決める。要件を投げると、下書きが出るので、直しを繰り返して確定する。判断が分かれた点は ADR に残る。
+5. `/plan-phases` で、確定した SPEC から `docs/PHASES.md` を作る。
+6. `/plan-issues` で issue にし、内容を見て `ai-ready` を付け、`/next-task` で 1 つずつ実装させる。
 
 **コミット、push、リモートリポジトリの作成は、この skill ではしない。**
 

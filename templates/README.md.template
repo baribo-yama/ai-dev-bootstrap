@@ -8,10 +8,11 @@
 - 作業ログ: [docs/DEVLOG.md](docs/DEVLOG.md)
 
 ## Claude Code での進め方
-1. `/plan-issues` で、現在のフェーズのタスクを GitHub Issue にする。
-2. issue の内容を確認し、実装を任せるものに `ai-ready` ラベルを付ける。
-3. `/next-task` で、1 つ実装して PR を出す。
-4. PR を確認してマージする。2 に戻る。
+1. `/spec` で仕様を決める（`docs/SPEC.md`）。`/plan-phases` で `docs/PHASES.md` を作る。
+2. `/plan-issues` で、現在のフェーズのタスクを GitHub Issue にする。
+3. issue の内容を確認し、実装を任せるものに `ai-ready` ラベルを付ける。
+4. `/next-task` で、1 つ実装して PR を出す。
+5. PR を確認してマージする。3 に戻る。
 
 詳しくは [ADR 0001](docs/adr/0001-issue-driven-workflow.md) を参照。
 

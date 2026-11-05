@@ -4,10 +4,12 @@
 
 `/ai-dev-bootstrap` を実行すると、いくつかの質問に答えるだけで、次の進め方に必要なファイルが生成される。
 
-1. `/plan-issues` で、計画のタスクを GitHub Issue にする。
-2. 人間が内容を確認し、実装を任せる issue に `ai-ready` ラベルを付ける。
-3. `/next-task` で、Claude Code が issue を 1 つ実装して PR を出し、止まる。
-4. 人間が PR を確認してマージする。2 に戻る。
+1. `/spec` で、作りたいものの要件を投げる。Claude Code が `docs/SPEC.md` の下書きを出し、人間が直して、仕様が決まる（判断が分かれた点は `docs/adr/` に残る）。
+2. `/plan-phases` で、確定した仕様からフェーズとタスク（`docs/PHASES.md`）を作る。
+3. `/plan-issues` で、タスクを GitHub Issue にする。
+4. 人間が内容を確認し、実装を任せる issue に `ai-ready` ラベルを付ける。
+5. `/next-task` で、Claude Code が issue を 1 つ実装して PR を出し、止まる。
+6. 人間が PR を確認してマージする。4 に戻る。
 
 ## インストール
 Claude Code の設定フォルダの `skills/` に、クローンする。
@@ -25,6 +27,7 @@ git clone https://github.com/baribo-yama/ai-dev-bootstrap ~/.claude/skills/ai-de
 2. `/ai-dev-bootstrap` を実行する。
 3. 質問（プロジェクト名、技術スタック、型チェック・lint・テストのコマンドなど）に答える。「あとで書く」も選べる。
 4. 生成されたファイルを確認し、CI の環境セットアップを書いて、PR にして入れる。
+5. `/spec <作りたいものの要件>` で仕様を決めるところから始める。
 
 既存のファイルは上書きしない。ぶつかるものは一覧にして、飛ばしてよいか聞く。
 
@@ -32,7 +35,7 @@ git clone https://github.com/baribo-yama/ai-dev-bootstrap ~/.claude/skills/ai-de
 | 場所 | 内容 |
 | --- | --- |
 | `CLAUDE.md` | 開発のルール。型チェック・lint・テストのコマンドは「検証コマンド」に書く |
-| `.claude/commands/` | `/plan-issues`、`/next-task`、`/adr`、`/log` |
+| `.claude/commands/` | `/spec`、`/plan-phases`、`/plan-issues`、`/next-task`、`/adr`、`/log` |
 | `.claude/settings.json` | 許可と禁止のコマンド（`git push --force`、`gh pr merge`、`.env` の読み取りなど）、型チェックのフック（任意） |
 | `.github/` | issue のフォーム、PR のテンプレート、CI（`check` ジョブ） |
 | `docs/` | `SPEC.md`、`PHASES.md`、`DEVLOG.md`、`adr/`（テンプレートと共通の ADR 1 本）、`todo/` |

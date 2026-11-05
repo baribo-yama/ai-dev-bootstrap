@@ -7,6 +7,7 @@
 Claude Code に実装を任せつつ、何を任せるかと何を取り込むかは人間が管理したい。
 
 ## 決定
+- `/spec` で SPEC を決め（下書きと修正を繰り返し、先頭を `状態: 確定` にする）、`/plan-phases` で PHASES を作る。SPEC が確定するまで、issue は作らない。
 - `/plan-issues` が PHASES のタスクを issue にする。実装を任せてよい issue には、人間が `ai-ready` を付ける。
 - `/next-task` は `ai-ready` で依存が解決済みの、最小番号の issue を 1 つ実装して PR を出し、止まる。マージは人間が行う。
 - ブランチ名は `feat/<issue番号>-<短い英語スラッグ>`。実装以外は `chore/<スラッグ>`。open の PR があるかどうかもブランチ名で判定する。

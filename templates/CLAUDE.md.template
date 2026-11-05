@@ -36,7 +36,8 @@ docs/  仕様・計画・ADR・作業ログ
 - 設計上の決定をしたら `docs/adr/` に ADR を追加する（`docs/adr/TEMPLATE.md` を使う）。
 - 作業の区切り（PR を出す前）に `docs/DEVLOG.md` の先頭へ追記する。つまずいたこと、実測値も書く。
 - 仕様を変えたら `docs/SPEC.md` を直し、変更の理由を DEVLOG に書く。
-- `/plan-issues`、`/next-task`、`/log`、`/adr` のコマンドを使ってよい。
+- 仕様は `/spec` で、フェーズとタスクは `/plan-phases` で決める。SPEC の先頭が `状態: 確定` になるまで、タスクを切らない。
+- `/spec`、`/plan-phases`、`/plan-issues`、`/next-task`、`/log`、`/adr` のコマンドを使ってよい。
 
 ## 禁止
 - 秘密情報（`.env`、秘密鍵など）を読む・出力する・コミットする。
